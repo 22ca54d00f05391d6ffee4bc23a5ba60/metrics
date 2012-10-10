@@ -18,7 +18,9 @@ public class Metrics {
 
     static {
         JmxReporter.startDefault(DEFAULT_REGISTRY);
-        Runtime.getRuntime().addShutdownHook(SHUTDOWN_HOOK);
+        if ( "true".equals(System.getProperty("metrics.shutdownhook")) ) {
+            Runtime.getRuntime().addShutdownHook(SHUTDOWN_HOOK);
+        }
     }
 
     private Metrics() { /* unused */ }
